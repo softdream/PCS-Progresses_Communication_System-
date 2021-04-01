@@ -65,6 +65,10 @@ private:
 	unsigned char *recvBuff;
 };
 
+static int fd = -1;
+static int ipPort = -1;
+static std::string ipAddr = "";
+
 template<typename T>
 Subscriber<T>::Subscriber(): size( 0 )
 {
@@ -77,6 +81,8 @@ Subscriber<T>::Subscriber(): size( 0 )
 template<typename T>
 void Subscriber<T>::createASubscriber( std::string addr, int port )
 {
+	ipPort = port;
+	ipAddr = addr;
 
 	if( !transport->initSocketClient() ){
 		exit(-1);
@@ -88,6 +94,8 @@ void Subscriber<T>::createASubscriber( std::string addr, int port )
 	destAddr.sin_addr.s_addr = inet_addr( addr.c_str() );
 	destAddr.sin_port = htons( port );
 	unsigned char identify[4] = { 'a', 'b', 'c', 'd' };
+
+	fd = transport->getClientFd();
 
 	while( transport->write( transport->getClientFd(), identify, 4, destAddr ) <= 0 ){
 		sleep(1);
@@ -104,6 +112,14 @@ void Subscriber<T>::circleReceive()
 			memcpy( &data, recvBuff, sizeof( data ) );
 
 			cb_( data );
+			
+			struct sockaddr_in destAddr;
+			destAddr.sin_family = AF_INET;
+		        destAddr.sin_addr.s_addr = inet_addr( ipAddr.c_str() );
+		        destAddr.sin_port = htons( ipPort );
+        		unsigned char identify[4] = { 'a', 'a', 'a', 'a' };
+			int ret = sendto( fd, identify, 4, 0, ( struct sockaddr*)&destAddr, sizeof( destAddr ) );
+			if( ret > 0 ) std::cout<<"send Response ..."<<std::endl;
 		}
 	}
 }
