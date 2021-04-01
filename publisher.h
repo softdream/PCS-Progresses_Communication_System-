@@ -81,6 +81,8 @@ public:
 private:
 	void printSubscribersInfo();
 
+	void sendHeartBeats();
+
 private:
 	Transport *transport;	
 
@@ -176,12 +178,36 @@ void Publisher<T>::publish( T &data )
 		}
 		else {
 			std::cerr<<"published ..."<<ret<<std::endl;
-			for( size_t i = 0; i < recvEnable.size() ; i ++ ){
-				recvEnable[i] = true;
-			}
+			//for( size_t i = 0; i < recvEnable.size() ; i ++ ){
+			//	recvEnable[i] = true;
+			//}
 		}
 	}
 	
+}
+
+template<typename T>
+void Publisher<T>::sendHeartBeats()
+{
+	unsigned char heart[4] = { 'a', 'a', 'a', 'a' };
+	for( auto it = destInfoMap.begin(); it != destInfoMap.end(); it ++ ){
+		struct sockaddr_in destAddr;
+                destAddr.sin_family = AF_INET;
+                destAddr.sin_addr.s_addr = inet_addr( it->ipAddr.c_str() );
+                destAddr.sin_port = htons( it->port );
+
+		int ret = transport->write( transport->getServerFd(), heart, sizeof( heart ), destAddr );
+                if( ret < 0 ){
+                        std::cerr<<"send heartBeats failed ..."<<ret<<std::endl;
+                }
+                else {
+                        std::cerr<<"heartBeats ..."<<ret<<std::endl;
+                        for( size_t i = 0; i < recvEnable.size() ; i ++ ){
+                                recvEnable[i] = true;
+                        }
+                }
+	
+	}
 }
 
 template<typename T>
@@ -238,7 +264,9 @@ template<typename T>
 void Publisher<T>::timerCircle()
 {
 	while( 1 ){
-		std::this_thread::sleep_for( std::chrono::milliseconds( 1000  ) ) ;
+		std::this_thread::sleep_for( std::chrono::milliseconds( 400  ) ) ;
+		sendHeartBeats();
+		std::this_thread::sleep_for( std::chrono::milliseconds( 100  ) ) ;
 		for( size_t i = 0; i < recvEnable.size(); i ++ ){
 			if( recvEnable[i] == true ){
 				recvCount[i] ++;

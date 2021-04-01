@@ -56,6 +56,9 @@ public:
 	void registerCallback( CallBack<T> cb );
 	void registerCallback( CallBackRef<T> cb );
 
+private:
+	void heartBeatsResponse();
+
 private: 
 	Transport *transport;
 
@@ -108,20 +111,32 @@ void Subscriber<T>::circleReceive()
 	while(1){
 		memset( recvBuff, 0, size );
 		if( transport->read( transport->getClientFd(), recvBuff, size ) > 0){
-			T data;
-			memcpy( &data, recvBuff, sizeof( data ) );
+			if( recvBuff[0] == 'a' && recvBuff[1] == 'a' && recvBuff[2] == 'a' && recvBuff[3] == 'a' ){
+				heartBeatsResponse();
+			}
+			else {
+				T data;
+				memcpy( &data, recvBuff, sizeof( data ) );
 
-			cb_( data );
-			
-			struct sockaddr_in destAddr;
-			destAddr.sin_family = AF_INET;
-		        destAddr.sin_addr.s_addr = inet_addr( ipAddr.c_str() );
-		        destAddr.sin_port = htons( ipPort );
-        		unsigned char identify[4] = { 'a', 'a', 'a', 'a' };
-			int ret = sendto( fd, identify, 4, 0, ( struct sockaddr*)&destAddr, sizeof( destAddr ) );
-			if( ret > 0 ) std::cout<<"send Response ..."<<std::endl;
+				cb_( data );
+			}
 		}
 	}
+}
+
+template<typename T>
+void Subscriber<T>::heartBeatsResponse()
+{
+	struct sockaddr_in destAddr;
+        destAddr.sin_family = AF_INET;
+     	destAddr.sin_addr.s_addr = inet_addr( ipAddr.c_str() );
+      	destAddr.sin_port = htons( ipPort );
+      	
+	unsigned char identify[4] = { 'a', 'a', 'a', 'a' };
+                                
+	int ret = sendto( fd, identify, 4, 0, ( struct sockaddr*)&destAddr, sizeof( destAddr ) );
+        if( ret > 0 ) std::cout<<"send Response ..."<<std::endl;
+
 }
 
 template<typename T>
