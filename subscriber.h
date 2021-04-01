@@ -6,6 +6,8 @@
 #include "EpollEvent.h"
 #include <unistd.h>
 #include <functional>
+#include <chrono>
+#include <thread>
 
 namespace pcs{
 
@@ -27,7 +29,10 @@ public:
 
 	Subscriber( const Subscriber &obj ):transport( obj.transport ),	
 					    cb_( obj.cb_),
-					    size( obj.size )
+					    size( obj.size ),
+					    fd( obj.fd ),
+					    ipPort( obj.ipPort ),
+					    ipAddr( obj.ipAddr )
 	{
 		std::cout<<"Subscriber Copy Constructor ..."<<std::endl;
 		memcpy( recvBuff, obj.recvBuff, sizeof(T) + 1 );
@@ -41,6 +46,10 @@ public:
 		transport = other.transport;
 		cb_ = other.cb_;
 		size = other.size;
+
+		fd = other.fd;
+		ipPort = other.ipPort;
+		ipAddr = other.ipAddr;
 		memcpy( recvBuff, other.recvBuff, sizeof(T) + 1 );
 	}
 
@@ -56,6 +65,8 @@ public:
 	void registerCallback( CallBack<T> cb );
 	void registerCallback( CallBackRef<T> cb );
 
+	void timerCircle();
+
 private:
 	void heartBeatsResponse();
 
@@ -66,14 +77,28 @@ private:
 
 	int size;
 	unsigned char *recvBuff;
+
+
+	bool recvEnable;
+	int recvCount;
+
+	int fd;
+	int ipPort;
+	std::string ipAddr;
 };
 
-static int fd = -1;
-static int ipPort = -1;
-static std::string ipAddr = "";
+
+//static int fd = -1;
+//static int ipPort = -1;
+//static std::string ipAddr = "";
 
 template<typename T>
-Subscriber<T>::Subscriber(): size( 0 )
+Subscriber<T>::Subscriber(): size( 0 ), 
+			recvEnable( false ), 
+			recvCount( 0 ),
+			fd( -1 ),
+			ipPort( 0 ),
+			ipAddr( "" )
 {
 	transport = new TransportUDP;	
 	size = sizeof( T ) + 1;
@@ -112,6 +137,7 @@ void Subscriber<T>::circleReceive()
 		memset( recvBuff, 0, size );
 		if( transport->read( transport->getClientFd(), recvBuff, size ) > 0){
 			if( recvBuff[0] == 'a' && recvBuff[1] == 'a' && recvBuff[2] == 'a' && recvBuff[3] == 'a' ){
+				recvEnable = false;
 				heartBeatsResponse();
 			}
 			else {
@@ -135,7 +161,10 @@ void Subscriber<T>::heartBeatsResponse()
 	unsigned char identify[4] = { 'a', 'a', 'a', 'a' };
                                 
 	int ret = sendto( fd, identify, 4, 0, ( struct sockaddr*)&destAddr, sizeof( destAddr ) );
-        if( ret > 0 ) std::cout<<"send Response ..."<<std::endl;
+        if( ret > 0 ){
+		std::cout<<"send Response ..."<<std::endl;
+		//recvEnable = true;
+	}
 
 }
 
@@ -143,6 +172,24 @@ template<typename T>
 void Subscriber<T>::registerCallback( CallBack<T> cb )
 {
 	cb_ = cb;
+}
+
+template<typename T>
+void Subscriber<T>::timerCircle()
+{
+	while(1){
+		std::this_thread::sleep_for( std::chrono::milliseconds( 1000 ) );
+		if( recvEnable == true ){
+			recvCount ++;
+		}
+		else recvCount = 0;
+
+		if( recvCount > 3 ){
+			std::cout<<"the publisher is offline ..."<<std::endl;
+		}
+	
+		recvEnable = true;
+	}
 }
 
 
