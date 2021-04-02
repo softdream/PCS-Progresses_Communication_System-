@@ -1,0 +1,19 @@
+CMAKE_MINIMUM_REQUIRED( VERSION 3.5.1 )
+
+ADD_DEFINITIONS( -std=c++11 )
+
+SET( LIBRARY_OUTPUT_PATH "${PROJECT_BINARY_DIR}/lib" )
+
+AUX_SOURCE_DIRECTORY( ${PROJECT_SOURCE_DIR}/pcs/src pcs_src )
+
+INCLUDE_DIRECTORIES( "${PROJECT_SOURCE_DIR}/pcs/include" )
+
+# generate the lib files 
+ADD_LIBRARY( pcs SHARED ${pcs_src} )
+
+ADD_LIBRARY( pcs_static STATIC ${pcs_src} )
+
+SET_TARGET_PROPERTIES( pcs_static PROPERTIES OUTPUT_NAME "pcs" )
+
+# make install 
+#INSTALL( TARGETS pcs )

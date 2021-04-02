@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../lib/libpcs.a  CMakeFiles/pcs_static.dir/src/timer.cpp.o CMakeFiles/pcs_static.dir/src/EpollEvent.cpp.o CMakeFiles/pcs_static.dir/src/publisher.cpp.o CMakeFiles/pcs_static.dir/src/pcs.cpp.o CMakeFiles/pcs_static.dir/src/transport_udp.cpp.o CMakeFiles/pcs_static.dir/src/subscriber.cpp.o
+/usr/bin/ranlib ../lib/libpcs.a

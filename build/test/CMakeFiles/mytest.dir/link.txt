@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/mytest.dir/publish_test/publish_test.cpp.o  -o ../bin/mytest  -L/home/riki/Test/pcs_library/build/lib -Wl,-Bstatic -lpcs -Wl,-Bdynamic -lpthread -Wl,-rpath,/home/riki/Test/pcs_library/build/lib 
