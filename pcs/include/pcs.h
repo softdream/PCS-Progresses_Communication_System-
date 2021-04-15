@@ -61,9 +61,11 @@ Subscriber<T> PCS::subscribe( std::string addr, int port, CallBack<T> cb )
 	sub.registerCallback( cb );
 
 	std::thread subscriberThread( &Subscriber<T>::circleReceive, &sub );
-
+	std::thread timerThread( &Subscriber<T>::timerCircle, &sub );
+	
 	subscriberThread.detach();
 	//subscriberThread.join();
+	timerThread.detach();
 
 	return sub;
 }
