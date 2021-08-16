@@ -1,1 +1,0 @@
-/usr/bin/c++  -fPIC   -shared -Wl,-soname,libpcs.so -o ../lib/libpcs.so CMakeFiles/pcs.dir/src/timer.cpp.o CMakeFiles/pcs.dir/src/EpollEvent.cpp.o CMakeFiles/pcs.dir/src/publisher.cpp.o CMakeFiles/pcs.dir/src/pcs.cpp.o CMakeFiles/pcs.dir/src/transport_udp.cpp.o CMakeFiles/pcs.dir/src/subscriber.cpp.o 

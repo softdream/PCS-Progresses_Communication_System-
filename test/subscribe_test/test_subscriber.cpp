@@ -26,12 +26,14 @@ int main()
 	pcs::PCS pcs;
 	//Publisher<int> pub = pcs.advertise<int>( "192.168.72.129", 5555 );
 	
-	Subscriber<int> sub = pcs.subscribe<int>( "192.168.72.129", 5555, test );
+	Subscriber<int> sub = pcs.subscribe<int>( "192.168.72.137", 5555, test );
 
 
 	while(1){
 	//	pub.publish( a );
 		sleep(1);
 	}
+
+
 	return 0;
 }

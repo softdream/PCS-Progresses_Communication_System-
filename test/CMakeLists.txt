@@ -6,7 +6,7 @@ FIND_PACKAGE( Threads )
 
 SET( EXECUTABLE_OUTPUT_PATH "${PROJECT_BINARY_DIR}/bin" )
 
-AUX_SOURCE_DIRECTORY( ${PROJECT_SOURCE_DIR}/test/publish_test test_src )
+AUX_SOURCE_DIRECTORY( ${PROJECT_SOURCE_DIR}/test/subscribe_test test_src )
 
 INCLUDE_DIRECTORIES( "${PROJECT_SOURCE_DIR}/pcs/include" )
 

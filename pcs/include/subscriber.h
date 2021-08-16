@@ -70,6 +70,8 @@ public:
 private:
 	void heartBeatsResponse();
 
+	void sendSubscriberInfo();
+
 private: 
 	Transport *transport;
 
@@ -104,6 +106,23 @@ Subscriber<T>::Subscriber(): size( 0 ),
 	size = sizeof( T ) + 1;
 	recvBuff = new unsigned char[ size ];
 	memset( recvBuff, 0, size );
+}
+
+template<typename T>
+void Subscriber<T>::sendSubscriberInfo()
+{
+	struct sockaddr_in destAddr;
+        destAddr.sin_family = AF_INET;
+        destAddr.sin_addr.s_addr = inet_addr( ipAddr.c_str() );
+        destAddr.sin_port = htons( ipPort );
+        unsigned char identify[4] = { 'a', 'b', 'c', 'd' };
+
+        fd = transport->getClientFd();
+
+        while( transport->write( transport->getClientFd(), identify, 4, destAddr ) <= 0 ){
+                sleep(1);
+        }
+
 }
 
 template<typename T>
@@ -186,6 +205,8 @@ void Subscriber<T>::timerCircle()
 
 		if( recvCount > 3 ){
 			std::cout<<"the publisher is offline ..."<<std::endl;
+	
+			sendSubscriberInfo();		
 		}
 	
 		recvEnable = true;

@@ -1,9 +1,0 @@
-/home/riki/Test/pcs_library/build/CMakeFiles/edit_cache.dir
-/home/riki/Test/pcs_library/build/CMakeFiles/rebuild_cache.dir
-/home/riki/Test/pcs_library/build/pcs/CMakeFiles/rebuild_cache.dir
-/home/riki/Test/pcs_library/build/pcs/CMakeFiles/edit_cache.dir
-/home/riki/Test/pcs_library/build/pcs/CMakeFiles/pcs_static.dir
-/home/riki/Test/pcs_library/build/pcs/CMakeFiles/pcs.dir
-/home/riki/Test/pcs_library/build/test/CMakeFiles/edit_cache.dir
-/home/riki/Test/pcs_library/build/test/CMakeFiles/rebuild_cache.dir
-/home/riki/Test/pcs_library/build/test/CMakeFiles/mytest.dir
