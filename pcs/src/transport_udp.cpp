@@ -60,8 +60,12 @@ int TransportUDP::read( int fd, unsigned char *buffer, int size )
         }
 	
         buffer[ret] = '\n';
+
+#ifdef LOGON
         std::cout <<"recvfrom "<< inet_ntoa(server_recv_addr.sin_addr) <<": "<< ntohs( server_recv_addr.sin_port )<< buffer << std::endl;
-        return ret;
+#endif      
+
+	return ret;
 	/*struct sockaddr_in addr;
 	socklen_t addr_len;
 	int ret = recvfrom( fd, buffer, size, 0, ( struct sockaddr* )&addr, &addr_len );
@@ -85,7 +89,10 @@ int TransportUDP::write( int fd, unsigned char *buffer, int size )
                 std::cerr<<"send data falied ..."<<std::endl;
                 return false;
         }
-    //    std::cerr<<"send data succussfully ..."<<std::endl;
+#ifdef LOGON
+        std::cerr<<"send data succussfully ..."<<std::endl;
+#endif
+
         return ret;
 }
 
@@ -99,7 +106,9 @@ int TransportUDP::write( int fd, unsigned char *buffer, int size, int port )
                 std::cerr<<"send data falied ..."<<std::endl;
                 return false;
         }
-      //  std::cerr<<"send data succussfully ..."<<std::endl;
+#ifdef LOGON
+        std::cerr<<"send data succussfully ..."<<std::endl;
+#endif
         return ret;
 }
 
@@ -110,8 +119,11 @@ int TransportUDP::write( int fd, unsigned char *buffer, int size, struct sockadd
                 std::cerr<<"send data falied ..."<<std::endl;
                 return false;
         }
-        //std::cerr<<"send data succussfully ..."<<std::endl;
-        return ret;
+#ifdef LOGON
+        std::cerr<<"send data succussfully ..."<<std::endl;
+#endif
+
+	return ret;
 }
 
 void TransportUDP::closeSocket( int fd )

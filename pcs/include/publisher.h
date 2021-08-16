@@ -71,7 +71,7 @@ public:
 
 	void publish( T &data );
 
-	int getPublisherFd() const
+	inline const int getPublisherFd() const
 	{
 		return transport->getServerFd();
 	}	
@@ -177,7 +177,9 @@ void Publisher<T>::publish( T &data )
 			std::cerr<<"publish failed ..."<<ret<<std::endl;
 		}
 		else {
+#ifdef LOGON
 			std::cerr<<"published ..."<<ret<<std::endl;
+#endif
 			//for( size_t i = 0; i < recvEnable.size() ; i ++ ){
 			//	recvEnable[i] = true;
 			//}
@@ -198,10 +200,14 @@ void Publisher<T>::sendHeartBeats()
 
 		int ret = transport->write( transport->getServerFd(), heart, sizeof( heart ), destAddr );
                 if( ret < 0 ){
+#ifdef LOGON
                         std::cerr<<"send heartBeats failed ..."<<ret<<std::endl;
+#endif
                 }
                 else {
+#ifdef LOGON
                         std::cerr<<"heartBeats ..."<<ret<<std::endl;
+#endif
                         for( size_t i = 0; i < recvEnable.size() ; i ++ ){
                                 recvEnable[i] = true;
                         }

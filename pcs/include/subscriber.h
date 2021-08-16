@@ -181,7 +181,10 @@ void Subscriber<T>::heartBeatsResponse()
                                 
 	int ret = sendto( fd, identify, 4, 0, ( struct sockaddr*)&destAddr, sizeof( destAddr ) );
         if( ret > 0 ){
+
+#ifdef LOGON
 		std::cout<<"send Response ..."<<std::endl;
+#endif
 		//recvEnable = true;
 	}
 
