@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/riki/Test/pcs_library2/test/../pcs/include
+CXX_INCLUDES = -I/home/riki/Test/pcs_library_image_modification/test/../pcs/include
 
 CXX_FLAGS =   -std=c++11
 

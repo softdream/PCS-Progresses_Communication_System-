@@ -9,6 +9,8 @@
 #include <chrono>
 #include <thread>
 
+#define UDP_MAX_LENGHT 60000
+
 namespace pcs{
 
 struct SubscribersInfo{
@@ -108,6 +110,10 @@ private:
         int recvNum;
         std::vector<int> recvCount;
 
+	// added for huge message
+	bool needCutPieces = false;
+	int pieces = 0;
+	int remainLength = 0;
 };
 
 /*template<typename T>
@@ -132,10 +138,15 @@ Publisher<T>::Publisher(): subscribersCount( 0 ),
 				recvNum( 0 )
 {
 	transport = new TransportUDP;
-	size  = sizeof( T ) + 1;
+	size  = sizeof( T );
 	sendBuff = new unsigned char[ size ];
 	memset( sendBuff, 0, size );
 
+	if( size > UDP_MAX_LENGHT ){
+		needCutPieces = true;
+		pieces = size / UDP_MAX_LENGHT;
+		remainLength = size - pieces * UDP_MAX_LENGHT;
+	}
 }
 
 template<typename T>
@@ -164,26 +175,52 @@ template<typename T>
 void Publisher<T>::publish( T &data )
 {
 	//std::cout<<"publish ..."<<std::endl;
-	memset( sendBuff, 0, size );
-	memcpy( sendBuff, &data, sizeof( data ) ) ;
-	for( auto it = destInfoMap.begin(); it != destInfoMap.end(); it ++ ){
-		struct sockaddr_in destAddr;
-		destAddr.sin_family = AF_INET;
-		destAddr.sin_addr.s_addr = inet_addr( it->ipAddr.c_str() );
-		destAddr.sin_port = htons( it->port );
+	if( !needCutPieces ){ // need cut
+		memset( sendBuff, 0, size );
+		memcpy( sendBuff, &data, sizeof( data ) ) ;
+		for( auto it = destInfoMap.begin(); it != destInfoMap.end(); it ++ ){
+			struct sockaddr_in destAddr;
+			destAddr.sin_family = AF_INET;
+			destAddr.sin_addr.s_addr = inet_addr( it->ipAddr.c_str() );
+			destAddr.sin_port = htons( it->port );
 	
-		int ret = transport->write( transport->getServerFd(), sendBuff, sizeof( data ), destAddr );
-		if( ret < 0 ){
-			std::cerr<<"publish failed ..."<<ret<<std::endl;
-		}
-		else {
+			int ret = transport->write( transport->getServerFd(), sendBuff, sizeof( data ), destAddr );
+			if( ret < 0 ){
+				std::cerr<<"publish failed ..."<<ret<<std::endl;
+			}
+			else {
 #ifdef LOGON
-			std::cerr<<"published ..."<<ret<<std::endl;
+				std::cerr<<"published ..."<<ret<<std::endl;
 #endif
-			//for( size_t i = 0; i < recvEnable.size() ; i ++ ){
-			//	recvEnable[i] = true;
-			//}
+				//for( size_t i = 0; i < recvEnable.size() ; i ++ ){
+				//	recvEnable[i] = true;
+				//}
+			}
 		}
+	}
+	else {
+		memset( sendBuff, 0, size );
+                memcpy( sendBuff, &data, sizeof( data ) ) ;
+		for( auto it = destInfoMap.begin(); it != destInfoMap.end(); it ++ ){
+                        struct sockaddr_in destAddr;
+                        destAddr.sin_family = AF_INET;
+                        destAddr.sin_addr.s_addr = inet_addr( it->ipAddr.c_str() );
+                        destAddr.sin_port = htons( it->port );
+			
+			int i = 0;
+			for( ; i < pieces; i ++ ){
+				int ret = transport->write( transport->getServerFd(), &sendBuff[i * UDP_MAX_LENGHT], UDP_MAX_LENGHT, destAddr );
+                        	if( ret < 0 ){
+                                	std::cerr<<"publish failed ..."<<ret<<std::endl;
+                        	}
+			}
+			int ret = transport->write( transport->getServerFd(), &sendBuff[i * UDP_MAX_LENGHT], remainLength, destAddr );
+                        if( ret < 0 ){
+        	                std::cerr<<"publish failed ..."<<ret<<std::endl;
+                        }
+			
+		}
+		
 	}
 	
 }

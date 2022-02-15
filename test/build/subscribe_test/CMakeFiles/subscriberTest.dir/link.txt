@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/subscriberTest.dir/test_subscriber.cpp.o -o ../bin/subscriberTest   -L/home/riki/Test/pcs_library2/test/../build/lib  -Wl,-rpath,/home/riki/Test/pcs_library2/test/../build/lib -Wl,-Bstatic -lpcs -Wl,-Bdynamic -lpthread 
+/usr/bin/c++ CMakeFiles/subscriberTest.dir/test_subscriber.cpp.o -o ../bin/subscriberTest   -L/home/riki/Test/pcs_library_image_modification/test/../build/lib  -Wl,-rpath,/home/riki/Test/pcs_library_image_modification/test/../build/lib -Wl,-Bstatic -lpcs -Wl,-Bdynamic -lpthread 

@@ -3,44 +3,32 @@
 #include "pcs.h"
 
 #include "transport_udp.h"
-
+#include "data_type.h"
 #include <unistd.h>
-
-
-unsigned char buffer[32];
-
-using namespace pcs;
-
-int a = 40;
-
-struct Data{
-	char head1;
-	char head2;
-	char head3;
-	
-	char data[64];
-
-	char rear;
-
-};
-typedef struct Data Data;
 
 int main()
 {
 	std::cout<<"Program begins ..."<<std::endl;
 
 	pcs::PCS pcs;
-	Publisher<Data> pub = pcs.advertise<Data>( "127.0.0.1", 5555 );
+	pcs::Publisher<zxy::CarInfo> pub = pcs.advertise<zxy::CarInfo>( "127.0.0.1", 5555 );
 	
-	Data d;
-	d.head1 = 'a';
-	d.head2 = 'b';
-	d.head3 = 'c';
-	
+	zxy::CarInfo car_info;
+	car_info.time_stamp = 1245677;
+	car_info.velocity = 30.0f;
+	car_info.acceleration = 1.0f;
+	car_info.pitch = 0.3f;
+	car_info.yaw = 0.4f;
+	car_info.roll = 0.5f;
 
+	int count = 0;
 	while(1){
-		pub.publish( d );
-		sleep(1);
+		// 
+		pub.publish( car_info );
+		//sleep(1);
+		usleep( 40000 );
+		count ++;
+	//	std::cout<<"publish a message, count : "<<count<<std::endl;
 	}
 	return 0;
 }

@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/riki/Test/pcs_library2/test/publish_test/publish_test.cpp" "publish_test/CMakeFiles/publishTest.dir/publish_test.cpp.o" "gcc" "publish_test/CMakeFiles/publishTest.dir/publish_test.cpp.o.d"
+  "/home/riki/Test/pcs_library_image_modification/test/publish_test/publish_test.cpp" "publish_test/CMakeFiles/publishTest.dir/publish_test.cpp.o" "gcc" "publish_test/CMakeFiles/publishTest.dir/publish_test.cpp.o.d"
   )
 
 # Targets to which this target links.

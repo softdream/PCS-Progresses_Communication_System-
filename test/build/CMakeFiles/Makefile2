@@ -54,10 +54,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/riki/Test/pcs_library2/test
+CMAKE_SOURCE_DIR = /home/riki/Test/pcs_library_image_modification/test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/riki/Test/pcs_library2/test/build
+CMAKE_BINARY_DIR = /home/riki/Test/pcs_library_image_modification/test/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -114,14 +114,14 @@ subscribe_test/clean: subscribe_test/CMakeFiles/subscriberTest.dir/clean
 publish_test/CMakeFiles/publishTest.dir/all:
 	$(MAKE) $(MAKESILENT) -f publish_test/CMakeFiles/publishTest.dir/build.make publish_test/CMakeFiles/publishTest.dir/depend
 	$(MAKE) $(MAKESILENT) -f publish_test/CMakeFiles/publishTest.dir/build.make publish_test/CMakeFiles/publishTest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/riki/Test/pcs_library2/test/build/CMakeFiles --progress-num=1,2 "Built target publishTest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/riki/Test/pcs_library_image_modification/test/build/CMakeFiles --progress-num=1,2 "Built target publishTest"
 .PHONY : publish_test/CMakeFiles/publishTest.dir/all
 
 # Build rule for subdir invocation for target.
 publish_test/CMakeFiles/publishTest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/riki/Test/pcs_library2/test/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/riki/Test/pcs_library_image_modification/test/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 publish_test/CMakeFiles/publishTest.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/riki/Test/pcs_library2/test/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/riki/Test/pcs_library_image_modification/test/build/CMakeFiles 0
 .PHONY : publish_test/CMakeFiles/publishTest.dir/rule
 
 # Convenience name for target.
@@ -140,14 +140,14 @@ publish_test/CMakeFiles/publishTest.dir/clean:
 subscribe_test/CMakeFiles/subscriberTest.dir/all:
 	$(MAKE) $(MAKESILENT) -f subscribe_test/CMakeFiles/subscriberTest.dir/build.make subscribe_test/CMakeFiles/subscriberTest.dir/depend
 	$(MAKE) $(MAKESILENT) -f subscribe_test/CMakeFiles/subscriberTest.dir/build.make subscribe_test/CMakeFiles/subscriberTest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/riki/Test/pcs_library2/test/build/CMakeFiles --progress-num=3,4 "Built target subscriberTest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/riki/Test/pcs_library_image_modification/test/build/CMakeFiles --progress-num=3,4 "Built target subscriberTest"
 .PHONY : subscribe_test/CMakeFiles/subscriberTest.dir/all
 
 # Build rule for subdir invocation for target.
 subscribe_test/CMakeFiles/subscriberTest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/riki/Test/pcs_library2/test/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/riki/Test/pcs_library_image_modification/test/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 subscribe_test/CMakeFiles/subscriberTest.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/riki/Test/pcs_library2/test/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/riki/Test/pcs_library_image_modification/test/build/CMakeFiles 0
 .PHONY : subscribe_test/CMakeFiles/subscriberTest.dir/rule
 
 # Convenience name for target.

@@ -1,4 +1,4 @@
-# Install script for directory: /home/riki/Test/pcs_library2/test/publish_test
+# Install script for directory: /home/riki/Test/pcs_library_image_modification/test/publish_test
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/riki/Test/pcs_library2/test
+CMAKE_SOURCE_DIR = /home/riki/Test/pcs_library_image_modification/test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/riki/Test/pcs_library2/test/build
+CMAKE_BINARY_DIR = /home/riki/Test/pcs_library_image_modification/test/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/riki/Test/pcs_library2/test/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/riki/Test/pcs_library2/test/build/CMakeFiles /home/riki/Test/pcs_library2/test/build/subscribe_test//CMakeFiles/progress.marks
-	cd /home/riki/Test/pcs_library2/test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 subscribe_test/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/riki/Test/pcs_library2/test/build/CMakeFiles 0
+	cd /home/riki/Test/pcs_library_image_modification/test/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/riki/Test/pcs_library_image_modification/test/build/CMakeFiles /home/riki/Test/pcs_library_image_modification/test/build/subscribe_test//CMakeFiles/progress.marks
+	cd /home/riki/Test/pcs_library_image_modification/test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 subscribe_test/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/riki/Test/pcs_library_image_modification/test/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/riki/Test/pcs_library2/test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 subscribe_test/clean
+	cd /home/riki/Test/pcs_library_image_modification/test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 subscribe_test/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,22 +103,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/riki/Test/pcs_library2/test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 subscribe_test/preinstall
+	cd /home/riki/Test/pcs_library_image_modification/test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 subscribe_test/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/riki/Test/pcs_library2/test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 subscribe_test/preinstall
+	cd /home/riki/Test/pcs_library_image_modification/test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 subscribe_test/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/riki/Test/pcs_library2/test/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/riki/Test/pcs_library_image_modification/test/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 subscribe_test/CMakeFiles/subscriberTest.dir/rule:
-	cd /home/riki/Test/pcs_library2/test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 subscribe_test/CMakeFiles/subscriberTest.dir/rule
+	cd /home/riki/Test/pcs_library_image_modification/test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 subscribe_test/CMakeFiles/subscriberTest.dir/rule
 .PHONY : subscribe_test/CMakeFiles/subscriberTest.dir/rule
 
 # Convenience name for target.
@@ -127,7 +127,7 @@ subscriberTest: subscribe_test/CMakeFiles/subscriberTest.dir/rule
 
 # fast build rule for target.
 subscriberTest/fast:
-	cd /home/riki/Test/pcs_library2/test/build && $(MAKE) $(MAKESILENT) -f subscribe_test/CMakeFiles/subscriberTest.dir/build.make subscribe_test/CMakeFiles/subscriberTest.dir/build
+	cd /home/riki/Test/pcs_library_image_modification/test/build && $(MAKE) $(MAKESILENT) -f subscribe_test/CMakeFiles/subscriberTest.dir/build.make subscribe_test/CMakeFiles/subscriberTest.dir/build
 .PHONY : subscriberTest/fast
 
 test_subscriber.o: test_subscriber.cpp.o
@@ -135,7 +135,7 @@ test_subscriber.o: test_subscriber.cpp.o
 
 # target to build an object file
 test_subscriber.cpp.o:
-	cd /home/riki/Test/pcs_library2/test/build && $(MAKE) $(MAKESILENT) -f subscribe_test/CMakeFiles/subscriberTest.dir/build.make subscribe_test/CMakeFiles/subscriberTest.dir/test_subscriber.cpp.o
+	cd /home/riki/Test/pcs_library_image_modification/test/build && $(MAKE) $(MAKESILENT) -f subscribe_test/CMakeFiles/subscriberTest.dir/build.make subscribe_test/CMakeFiles/subscriberTest.dir/test_subscriber.cpp.o
 .PHONY : test_subscriber.cpp.o
 
 test_subscriber.i: test_subscriber.cpp.i
@@ -143,7 +143,7 @@ test_subscriber.i: test_subscriber.cpp.i
 
 # target to preprocess a source file
 test_subscriber.cpp.i:
-	cd /home/riki/Test/pcs_library2/test/build && $(MAKE) $(MAKESILENT) -f subscribe_test/CMakeFiles/subscriberTest.dir/build.make subscribe_test/CMakeFiles/subscriberTest.dir/test_subscriber.cpp.i
+	cd /home/riki/Test/pcs_library_image_modification/test/build && $(MAKE) $(MAKESILENT) -f subscribe_test/CMakeFiles/subscriberTest.dir/build.make subscribe_test/CMakeFiles/subscriberTest.dir/test_subscriber.cpp.i
 .PHONY : test_subscriber.cpp.i
 
 test_subscriber.s: test_subscriber.cpp.s
@@ -151,7 +151,7 @@ test_subscriber.s: test_subscriber.cpp.s
 
 # target to generate assembly for a file
 test_subscriber.cpp.s:
-	cd /home/riki/Test/pcs_library2/test/build && $(MAKE) $(MAKESILENT) -f subscribe_test/CMakeFiles/subscriberTest.dir/build.make subscribe_test/CMakeFiles/subscriberTest.dir/test_subscriber.cpp.s
+	cd /home/riki/Test/pcs_library_image_modification/test/build && $(MAKE) $(MAKESILENT) -f subscribe_test/CMakeFiles/subscriberTest.dir/build.make subscribe_test/CMakeFiles/subscriberTest.dir/test_subscriber.cpp.s
 .PHONY : test_subscriber.cpp.s
 
 # Help Target
@@ -177,6 +177,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/riki/Test/pcs_library2/test/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/riki/Test/pcs_library_image_modification/test/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

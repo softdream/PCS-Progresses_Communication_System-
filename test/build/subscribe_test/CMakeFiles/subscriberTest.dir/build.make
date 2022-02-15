@@ -53,10 +53,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/riki/Test/pcs_library2/test
+CMAKE_SOURCE_DIR = /home/riki/Test/pcs_library_image_modification/test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/riki/Test/pcs_library2/test/build
+CMAKE_BINARY_DIR = /home/riki/Test/pcs_library_image_modification/test/build
 
 # Include any dependencies generated for this target.
 include subscribe_test/CMakeFiles/subscriberTest.dir/depend.make
@@ -72,16 +72,16 @@ include subscribe_test/CMakeFiles/subscriberTest.dir/flags.make
 subscribe_test/CMakeFiles/subscriberTest.dir/test_subscriber.cpp.o: subscribe_test/CMakeFiles/subscriberTest.dir/flags.make
 subscribe_test/CMakeFiles/subscriberTest.dir/test_subscriber.cpp.o: ../subscribe_test/test_subscriber.cpp
 subscribe_test/CMakeFiles/subscriberTest.dir/test_subscriber.cpp.o: subscribe_test/CMakeFiles/subscriberTest.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/riki/Test/pcs_library2/test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object subscribe_test/CMakeFiles/subscriberTest.dir/test_subscriber.cpp.o"
-	cd /home/riki/Test/pcs_library2/test/build/subscribe_test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT subscribe_test/CMakeFiles/subscriberTest.dir/test_subscriber.cpp.o -MF CMakeFiles/subscriberTest.dir/test_subscriber.cpp.o.d -o CMakeFiles/subscriberTest.dir/test_subscriber.cpp.o -c /home/riki/Test/pcs_library2/test/subscribe_test/test_subscriber.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/riki/Test/pcs_library_image_modification/test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object subscribe_test/CMakeFiles/subscriberTest.dir/test_subscriber.cpp.o"
+	cd /home/riki/Test/pcs_library_image_modification/test/build/subscribe_test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT subscribe_test/CMakeFiles/subscriberTest.dir/test_subscriber.cpp.o -MF CMakeFiles/subscriberTest.dir/test_subscriber.cpp.o.d -o CMakeFiles/subscriberTest.dir/test_subscriber.cpp.o -c /home/riki/Test/pcs_library_image_modification/test/subscribe_test/test_subscriber.cpp
 
 subscribe_test/CMakeFiles/subscriberTest.dir/test_subscriber.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/subscriberTest.dir/test_subscriber.cpp.i"
-	cd /home/riki/Test/pcs_library2/test/build/subscribe_test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/riki/Test/pcs_library2/test/subscribe_test/test_subscriber.cpp > CMakeFiles/subscriberTest.dir/test_subscriber.cpp.i
+	cd /home/riki/Test/pcs_library_image_modification/test/build/subscribe_test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/riki/Test/pcs_library_image_modification/test/subscribe_test/test_subscriber.cpp > CMakeFiles/subscriberTest.dir/test_subscriber.cpp.i
 
 subscribe_test/CMakeFiles/subscriberTest.dir/test_subscriber.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/subscriberTest.dir/test_subscriber.cpp.s"
-	cd /home/riki/Test/pcs_library2/test/build/subscribe_test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/riki/Test/pcs_library2/test/subscribe_test/test_subscriber.cpp -o CMakeFiles/subscriberTest.dir/test_subscriber.cpp.s
+	cd /home/riki/Test/pcs_library_image_modification/test/build/subscribe_test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/riki/Test/pcs_library_image_modification/test/subscribe_test/test_subscriber.cpp -o CMakeFiles/subscriberTest.dir/test_subscriber.cpp.s
 
 # Object files for target subscriberTest
 subscriberTest_OBJECTS = \
@@ -93,18 +93,18 @@ subscriberTest_EXTERNAL_OBJECTS =
 bin/subscriberTest: subscribe_test/CMakeFiles/subscriberTest.dir/test_subscriber.cpp.o
 bin/subscriberTest: subscribe_test/CMakeFiles/subscriberTest.dir/build.make
 bin/subscriberTest: subscribe_test/CMakeFiles/subscriberTest.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/riki/Test/pcs_library2/test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../bin/subscriberTest"
-	cd /home/riki/Test/pcs_library2/test/build/subscribe_test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/subscriberTest.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/riki/Test/pcs_library_image_modification/test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../bin/subscriberTest"
+	cd /home/riki/Test/pcs_library_image_modification/test/build/subscribe_test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/subscriberTest.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 subscribe_test/CMakeFiles/subscriberTest.dir/build: bin/subscriberTest
 .PHONY : subscribe_test/CMakeFiles/subscriberTest.dir/build
 
 subscribe_test/CMakeFiles/subscriberTest.dir/clean:
-	cd /home/riki/Test/pcs_library2/test/build/subscribe_test && $(CMAKE_COMMAND) -P CMakeFiles/subscriberTest.dir/cmake_clean.cmake
+	cd /home/riki/Test/pcs_library_image_modification/test/build/subscribe_test && $(CMAKE_COMMAND) -P CMakeFiles/subscriberTest.dir/cmake_clean.cmake
 .PHONY : subscribe_test/CMakeFiles/subscriberTest.dir/clean
 
 subscribe_test/CMakeFiles/subscriberTest.dir/depend:
-	cd /home/riki/Test/pcs_library2/test/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/riki/Test/pcs_library2/test /home/riki/Test/pcs_library2/test/subscribe_test /home/riki/Test/pcs_library2/test/build /home/riki/Test/pcs_library2/test/build/subscribe_test /home/riki/Test/pcs_library2/test/build/subscribe_test/CMakeFiles/subscriberTest.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/riki/Test/pcs_library_image_modification/test/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/riki/Test/pcs_library_image_modification/test /home/riki/Test/pcs_library_image_modification/test/subscribe_test /home/riki/Test/pcs_library_image_modification/test/build /home/riki/Test/pcs_library_image_modification/test/build/subscribe_test /home/riki/Test/pcs_library_image_modification/test/build/subscribe_test/CMakeFiles/subscriberTest.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : subscribe_test/CMakeFiles/subscriberTest.dir/depend
 

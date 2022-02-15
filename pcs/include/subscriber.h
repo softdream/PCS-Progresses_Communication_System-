@@ -9,6 +9,8 @@
 #include <chrono>
 #include <thread>
 
+#define UDP_MAX_LENGHT 60000
+
 namespace pcs{
 
 template<typename T>
@@ -17,6 +19,11 @@ using CallBack = std::function<void( T )>;
 template<typename T>
 using CallBackRef = std::function<void( T& )>;
 
+template<typename T>
+using CallBackConst = std::function<void( const T)>;
+
+template<typename T>
+using CallBackConstRef = std::function<void( const T& )>;
 
 template<typename T>
 class Subscriber{
@@ -56,6 +63,8 @@ public:
 	~Subscriber()
 	{
 		delete[] recvBuff;
+		
+		delete[] buffer;
 	}
 
 	void createASubscriber( std::string addr, int port );
@@ -87,6 +96,13 @@ private:
 	int fd;
 	int ipPort;
 	std::string ipAddr;
+
+	// added for huge message
+	bool needCutPieces = false;
+	int pieces = 0;
+	int remainLength = 0;
+	int piecesCount = 0;
+	unsigned char *buffer;
 };
 
 
@@ -103,9 +119,22 @@ Subscriber<T>::Subscriber(): size( 0 ),
 			ipAddr( "" )
 {
 	transport = new TransportUDP;	
-	size = sizeof( T ) + 1;
-	recvBuff = new unsigned char[ size ];
-	memset( recvBuff, 0, size );
+	size = sizeof( T );
+	//recvBuff = new unsigned char[ size ];
+	//memset( recvBuff, 0, size );
+
+	if( size > UDP_MAX_LENGHT ){
+                needCutPieces = true;
+                pieces = size / UDP_MAX_LENGHT;
+                remainLength = size - pieces * UDP_MAX_LENGHT;
+
+		buffer = new unsigned char[size];
+		recvBuff = new unsigned char[UDP_MAX_LENGHT];
+        }
+	else {
+		recvBuff = new unsigned char[ size ];
+	        memset( recvBuff, 0, size );
+	}
 }
 
 template<typename T>
@@ -153,20 +182,45 @@ template<typename T>
 void Subscriber<T>::circleReceive()
 {
 	while(1){
-		memset( recvBuff, 0, size );
-		if( transport->read( transport->getClientFd(), recvBuff, size ) > 0){
-			if( recvBuff[0] == 'a' && recvBuff[1] == 'a' && recvBuff[2] == 'a' && recvBuff[3] == 'a' ){
-				recvEnable = false;
-				heartBeatsResponse();
-			}
-			else {
-				T data;
-				memcpy( &data, recvBuff, sizeof( data ) );
+		if( !needCutPieces ){ // need cut
+			memset( recvBuff, 0, size );
+			if( transport->read( transport->getClientFd(), recvBuff, size ) > 0){
+				if( recvBuff[0] == 'a' && recvBuff[1] == 'a' && recvBuff[2] == 'a' && recvBuff[3] == 'a' ){
+					recvEnable = false;
+					heartBeatsResponse();
+				}
+				else {
+					T data;
+					memcpy( &data, recvBuff, sizeof( data ) );
 
-				cb_( data );
+					cb_( data );
+				}
 			}
 		}
-	}
+		else {
+			int recvLen = transport->read( transport->getClientFd(), recvBuff, UDP_MAX_LENGHT );
+			if( recvLen > 0 ){
+        	                if( recvBuff[0] == 'a' && recvBuff[1] == 'a' && recvBuff[2] == 'a' && recvBuff[3] == 'a' ){
+                	                recvEnable = false;
+                        	        heartBeatsResponse();
+                        	}
+	                        else {
+					memcpy( &buffer[piecesCount * UDP_MAX_LENGHT], recvBuff, recvLen );	
+					piecesCount ++;
+	
+					if( piecesCount == pieces + 1 ){
+						piecesCount = 0;
+					
+						T data;
+						memcpy( &data, buffer, size );
+					
+						cb_( data );
+					}
+                        	}
+                	}
+		}
+	
+	}// end of while	
 }
 
 template<typename T>

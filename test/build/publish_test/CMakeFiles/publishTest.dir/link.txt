@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/publishTest.dir/publish_test.cpp.o -o ../bin/publishTest   -L/home/riki/Test/pcs_library2/test/../build/lib  -Wl,-rpath,/home/riki/Test/pcs_library2/test/../build/lib -Wl,-Bstatic -lpcs -Wl,-Bdynamic -lpthread 
+/usr/bin/c++ CMakeFiles/publishTest.dir/publish_test.cpp.o -o ../bin/publishTest   -L/home/riki/Test/pcs_library_image_modification/test/../build/lib  -Wl,-rpath,/home/riki/Test/pcs_library_image_modification/test/../build/lib -Wl,-Bstatic -lpcs -Wl,-Bdynamic -lpthread 
