@@ -25,7 +25,7 @@
 		返回一个Publisher对象。</br>
 #### 4、发布消息
  
-	这里用到了Publisher类中的接口函数：</br>
+这里用到了Publisher类中的接口函数：</br>
 ```cpp
 	template<typename T>
   void publish( T &data );
